@@ -1,0 +1,16 @@
+.table-container {
+    overflow: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: white 1px solid;
+}
+
+th {
+    background: #0a2d66;
+}
