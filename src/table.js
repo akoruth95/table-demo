@@ -113,7 +113,6 @@ export default class TableComponent extends Component {
             <tbody>
               <TableHeader></TableHeader>
               <TableContent></TableContent>
-              <div></div>
             </tbody>
           </table>
         )
