@@ -1,9 +1,11 @@
+const compression = require('compression')
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
 const PORT = 8080;
 const app = express();
+app.use(compression())
 
 function csvToJson(csvFilePath) {
     
@@ -27,7 +29,17 @@ function csvToJson(csvFilePath) {
 const sampleDataResponse = csvToJson(path.join(__dirname, 'sample.csv'));
 
 app.get('/sample', function (req, res) {
-    res.jsonp(sampleDataResponse);
+    let reachedEnd = false;
+    let partialData = [];
+    const start = req.query.start;
+    const end = req.query.end;
+    if (end > (sampleDataResponse.data.length - 1)) {
+        reachedEnd = true;
+        partialData = sampleDataResponse.data.slice(start);
+    } else {
+        partialData = sampleDataResponse.data.slice(start, end);
+    }
+    res.jsonp({headers: sampleDataResponse.headers, data: partialData, end: reachedEnd});
 })
 
 app.listen(PORT, function () {
