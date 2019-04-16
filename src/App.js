@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import Table from './table';
+import Table from './infinite-scroll-recycle/table';
 
 class App extends Component {
   render() {
